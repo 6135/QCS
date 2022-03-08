@@ -1,5 +1,5 @@
 #define SpinVersion	"Spin Version 6.0.0 -- 5 December 2010"
-#define PanSource	"sumEx1"
+#define PanSource	"Troca.pml"
 
 #define G_long	4
 #define G_int	4
@@ -68,19 +68,23 @@ typedef struct S_F_MAP {
 	char *fnm; int from; int upto;
 } S_F_MAP;
 
-#define nstates0	14	/* Q */
-#define endstate0	13
+#define nstates0	28	/* Troca */
+#define endstate0	27
 short src_ln0 [] = {
-	  0,   5,   6,   7,   8,   9,  10,  10, 
-	  4,  12,   4,  12,  15,  17,   0, };
+	  0,   5,   5,   6,   4,   8,   4,   8, 
+	 10,  12,  12,  13,  11,  15,  11,  15, 
+	 16,  19,  19,  20,  20,  18,  24,  24, 
+	 25,  26,  30,  32,   0, };
 S_F_MAP src_file0 [] = {
 	{ ""-"", 0, 0 },
-	{ "sumEx1", 1, 13 },
-	{ ""-"", 14, 15 }
+	{ "Troca.pml", 1, 27 },
+	{ ""-"", 28, 29 }
 };
 uchar reached0 [] = {
-	  0,   1,   1,   0,   0,   0,   1,   0, 
-	  0,   1,   1,   0,   0,   0,   0, };
+	  0,   1,   0,   1,   0,   1,   1,   0, 
+	  0,   1,   0,   1,   0,   1,   1,   0, 
+	  0,   1,   0,   1,   0,   0,   1,   0, 
+	  0,   0,   0,   0,   0, };
 uchar *loopstate0;
 struct {
 	int tp; short *src;
@@ -96,8 +100,8 @@ struct {
 } code_lookup[] = {
 	{ (char *) 0, "" }
 };
-#define _T5	7
-#define _T2	8
+#define _T5	13
+#define _T2	14
 #define T_ID	unsigned char
 #define SYNC	0
 #define ASYNC	0
@@ -112,30 +116,31 @@ struct {
 	#endif
 #endif
 char *procname[] = {
-   "Q",
+   "Troca",
    ":np_:",
 };
 
 enum btypes { NONE=0, N_CLAIM=1, I_PROC=2, A_PROC=3, P_PROC=4, E_TRACE=5, N_TRACE=6 };
 int Btypes[] = {
-   3,	/* Q */
+   3,	/* Troca */
    0	/* :np_: */
 };
 
-#define PQ	((P0 *)this)
-typedef struct P0 { /* Q */
+#define PTroca	((P0 *)this)
+typedef struct P0 { /* Troca */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 2; /* proctype */
-	unsigned _p   : 5; /* state    */
-	int _1_i;
-	int _1_result;
-	int _1_supposedRes;
+	unsigned _p   : 6; /* state    */
+	int _1_a;
+	int _1_b;
+	int _1_aa;
+	int _1_bb;
 } P0;
-#define Air0	(sizeof(P0) - Offsetof(P0, _1_supposedRes) - 1*sizeof(int))
+#define Air0	(sizeof(P0) - Offsetof(P0, _1_bb) - 1*sizeof(int))
 typedef struct P1 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 2; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 6; /* state    */
 } P1;
 #define Air1	(sizeof(P1) - 2)
 
@@ -354,7 +359,7 @@ uchar *loopstate1;  /* np_ */
 #define endstate1	2 /* np_ */
 
 #define start1	0 /* np_ */
-#define start0	8
+#define start0	4
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
@@ -485,7 +490,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	9
+#define NTRANS	15
 #ifdef PEG
 	long peg[NTRANS];
 #endif
