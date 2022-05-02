@@ -8,7 +8,17 @@ class Board implements Ilayout, Cloneable {
 	
 	private int dim = 0;
 	List<Stack<Character>> board;
-	
+	/**
+	 *Goal -> ADBC ,
+	 * 
+	 *Start-> A DB C
+	 * A D B C
+	 * AB D C
+	 * AC DB
+	 * A DBC
+	 * DBA C
+	 * DB CA
+	 */
 	/**
 	 * Este construtor cria uma Board a partir de uma string str criando 
 	 * uma lista de stacks a partir das letras introduzidas
@@ -72,6 +82,7 @@ class Board implements Ilayout, Cloneable {
 	//This one
 	@Override
 	public boolean equals(Object t) {
+		
 		List<Stack<Character>> l1 = ((Board) t).board;
 		for (int i = 0; i < board.size(); i++) {
 			if (!l1.contains(board.get(i))) {
