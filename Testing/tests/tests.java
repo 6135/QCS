@@ -1,23 +1,152 @@
 import static org.junit.Assert.assertEquals;
-import java.util.Iterator;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.plaf.nimbus.State;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 public class tests {
 
+	@Rule     
+	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
 	@Test
-	public void testTime() {
-		long startTime = System.nanoTime();
-		Board b = new Board("ABCDEFG");
-		Astar b_astar = new Astar();
-		b_astar.solve(b, new Board("GBCDEFA"));
-		long endTime = System.nanoTime();
-		long totalTime = endTime - startTime;
-		System.out.println((double) totalTime / 1_000_000_000.0);
+	public void testEqualsp3() {
+		//boards sao iguais
+        Board initial = new Board("AB C D");
+        Board l1 = new Board("AB D C");
+        assertEquals(initial,l1);//initial.equals(l1)
+    }
+	
+	@Test
+	public void testEqualsp1() {
+		//boards sao vazias
+        Board initial = new Board("");
+        Board l1 = new Board("");
+        assertEquals(initial,l1);//initial.equals(l1)
+    }
+
+	@Test
+	public void testEqualsp2() {
+		//boards sao diferentes
+        Board initial = new Board("AB C D");
+        Board l1 = new Board("AC B D");
+        assertNotEquals(initial,l1);//initial.equals(l1)
+		
+    }
+
+	@Test
+	public void testesucsnull() {
+		//Ilayout l, State n
+		//Ilayout -> passar uma board
+
+		/*
+		Ilayout l, State n
+		*/
+		//n entra no if
+		Board board = new Board("A");
+		Astar.State pai = new Astar.State(board,null);
+		Astar.State filho = new Astar.State(new Board("A"),pai);
+		//List<State> esperado =null;
+		Astar alg = new Astar();
+		List<Astar.State> res = alg.sucessors(filho) ;
+		
+		assertEquals(res.size(),0);
+
+	}
+
+	@Test
+	public void testesucsnotnull() {
+		//Ilayout l, State n
+		//Ilayout -> passar uma board
+
+		/*
+		Ilayout l, State n
+		*/
+		//entra no if pq pai == null
+		Board board = new Board("A B");
+
+		Astar.State pai = new Astar.State(board,null);
+		Astar alg = new Astar();
+
+		List<Astar.State> res = alg.sucessors(pai) ;
+
+		Board boardesperado = new Board("AB");
+		Board boardesperado2 = new Board("BA");
+
+		assertEquals(res.size(),2);
+		
+		assertEquals(boardesperado,res.get(1).getBoard());
+
+		assertEquals(boardesperado2, res.get(0).getBoard());
+	
 	}
 	
+	@Test
+	public void testeboardsnaoiguais() {
+		//entra no if pq !e.equals(n.father.layout)
+		//so dois elementos nao passa no teste
+		Board boardpai = new Board("A B C");
+		//AB C  A BC  A CB  BA C  AC B  CA B 
+		Board boardfilho = new Board("AB C");
+		//
+		Astar.State pai = new Astar.State(boardpai,null);
+		Astar.State filho = new Astar.State(boardfilho,pai);
+
+		Astar alg = new Astar();
+
+		List<Astar.State> res = alg.sucessors(filho) ;
+
+		Board boardesperado = new Board("ABC");
+		Board boardesperado2 = new Board("A CB");
+
+		assertEquals(res.size(),2);
+		assertEquals(boardesperado,res.get(1).getBoard());
+		assertEquals(boardesperado2, res.get(0).getBoard());
+	}
+
+	//solve caminho p2
+
+	@Test
+	public void testsolvep2() {
+		
+		Board boardinicial = new Board("AB ");
+		Board boardobjetivo = new Board("ABCD");
+
+		Astar alg = new Astar();
+
+		exit.expectSystemExitWithStatus(0);
+		Iterator<Astar.State> resultado = alg.solve(boardinicial,boardobjetivo);
+
+		//
+		}
+
+		@Test
+		public void testsolvep3p4p5p6() {
+			
+			Board boardinicial = new Board("A B CD ");
+
+			Board boardobjetivo = new Board("AC B D");
 	
+			Astar alg = new Astar();
 	
+			//exit.expectSystemExitWithStatus(0);
+			Iterator<Astar.State> resultado = alg.solve(boardinicial,boardobjetivo);
+			assertEquals(resultado.hasNext(),true );
+			//
+			//AB CD | A BCD | AC B D | A BC D | B ACD | 
+			//
+			}
+			
+
+
+/* 
 	@Test
 	public void testTime2() {
 		long startTime = System.nanoTime();
@@ -101,6 +230,6 @@ public class tests {
 		long totalTime = endTime - startTime;
 		System.out.println((double) totalTime / 1_000_000.0);
 	}
-	
+	 */
 
 }

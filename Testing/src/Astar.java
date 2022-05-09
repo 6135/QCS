@@ -20,6 +20,10 @@ class Astar {
 				g = 0.0;
 		}
 
+		public Ilayout getBoard(){
+			return layout;
+		}
+
 		public String toString() {
 			return layout.toString();
 		}
@@ -40,7 +44,7 @@ class Astar {
 	protected Queue<State> abertos;
 	private State actual;
 	//this one
-	final private List<State> sucessors(State n) {
+	final public List<State> sucessors(State n) {
 		List<State> sucs = new ArrayList<>();
 		List<Ilayout> children = n.layout.children();
 		for (Ilayout e : children) {
@@ -65,26 +69,36 @@ class Astar {
 		while (!end) {
 			try {
 				if (abertos.isEmpty())
-					throw new Exception();
-			} catch (Exception e) {
+					throw new Exception();//terminar programa caso nao haja caminhos possiveis a fazer (board sem filhos)
+					//lista d abertos vazia
+						//se n adicionaste nada no inicio
+						//filhos da board sao filhos q ja foram visitados (ja estao na lista de fechados)para isso acontecer
+					//precisaria de????
+						//board goal maior que a inicial (com maior dimensao q a original), a 2 vai rapidamente gerar todas as combinacoes possiveis, adiciona todas a lista de fechados e nao vai conseguir adicionar nenhuma a de abertos, ficando a d abertos vazia
+					System.out.println("ok");
+					} catch (Exception e) {
 				System.out.println("Lista abertos vazia");
 				System.exit(0);
 			}
 			actual = abertos.poll();
-			if (actual.layout.isGoal(goal)) {
+			if (actual.layout.isGoal(goal)) { //ver se board atual e o goal
 				State father = actual.father;
 				outsequence.add(actual);
+				System.out.println("if (actual.layout.isGoal(goal))");
 				while (father != null) {
 					outsequence.add(0, father);
 					father = father.father;
+					System.out.println("while (father != null)");
 				}
 				end = true;
-			} else {
-				sucs = sucessors(actual);
-				fechados.add(actual);
+			} else {//se n for o goal
+				sucs = sucessors(actual);//filhos da board atual
+				fechados.add(actual);//meter esse no nos fechados
+				System.out.println("else");
 				for (State state: sucs) {
 					if (!fechados.contains(state)) {
-						abertos.add(state);
+						System.out.println("if (!fechados.contains(state))");
+						abertos.add(state);//meter sucessores no abertos se nao estiverem nos fechados
 					}
 				}
 			}

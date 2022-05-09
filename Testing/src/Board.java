@@ -82,7 +82,6 @@ class Board implements Ilayout, Cloneable {
 	//This one
 	@Override
 	public boolean equals(Object t) {
-		
 		List<Stack<Character>> l1 = ((Board) t).board;
 		for (int i = 0; i < board.size(); i++) {
 			if (!l1.contains(board.get(i))) {
@@ -224,6 +223,9 @@ class Board implements Ilayout, Cloneable {
 	    }
 	
   
+
+
+
 
 
 }
