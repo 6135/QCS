@@ -146,6 +146,18 @@ public class tests {
 			Astar.State lastState = null; // Guarda o ultimo estado para se puder verificar tambem o custo final
 			assertEquals((lastState = resultado.next()).getBoard(),boardobjetivo); // Verifica se o ultimo elemento da sequencia de saida esta correto, i.e, e igual ao objetivo
 			assertTrue(2 == lastState.getG()); //Verifica se o custo total das operacoes e igual a 2.
+			/* What the test does
+			* Declaramos uma board inicial "A CB" com o objetivo de percorrer varios nos, em primeiro lugar adicionamos a board inicial a lista de abertos,
+			* So corremos o ciclo enquanto nao encontrarmos goal, ou caso a list de abertos nao esteja vazia, como inicialmente adicionamos a board inicial, esta nao vai estar vazia logo seguimos o caminho 1-3-5
+			* no no 5 verificamos se e goal a board actual (atual e a ultima que retiramos da lista de abertos, neste caso a inicial), em 6 , 8, 10 criamos todos os sucessores da atual, fechamos a atual porque depois dos filhos nao ha mais nada a fazer com ela
+			* a seguir em 11 percorre-se os sucessores e caso estes nao tenham sido vistos anteriormente (i.e, estejam na lista fechados) adicionamos a list abertos
+			* Quando nao houver o mais sucessores repetimos o processo das linhas anteriores. Quando encontrarmos o goal, vamos retrocedendo nas boards ( funcionam como uma linked list q vai ao contrario) ate chegar a inicial,
+			* esta sequencia e adicionada a outSequence ate que ja nao seja possivel andar para tras, ficando esta orientada da board inicial a final
+			* finalmente retorna-se um iterador para esta sequencia.
+			*
+			*/
+			
+			
 			//
 			//AB CD | A BCD | AC B D | A BC D | B ACD | 
 			//
