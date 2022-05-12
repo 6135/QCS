@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.List;
@@ -133,15 +134,18 @@ public class tests {
 		@Test
 		public void testsolvep3p4p5p6p7() {
 			
-			Board boardinicial = new Board("A B CD ");
+			Board boardinicial = new Board("A CB");
 
-			Board boardobjetivo = new Board("AC B D");
+			Board boardobjetivo = new Board("AC B");
 	
 			Astar alg = new Astar();
 	
-			//exit.expectSystemExitWithStatus(0);
 			Iterator<Astar.State> resultado = alg.solve(boardinicial,boardobjetivo);
-			assertEquals(resultado.hasNext(),true );
+			assertEquals(resultado.next().getBoard(),boardinicial);
+			assertEquals(resultado.next().getBoard(),new Board("A B C"));
+			Astar.State lastState = null;
+			assertEquals((lastState = resultado.next()).getBoard(),boardobjetivo);
+			assertTrue(2 == lastState.getG());
 			//
 			//AB CD | A BCD | AC B D | A BC D | B ACD | 
 			//
