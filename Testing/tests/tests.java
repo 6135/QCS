@@ -133,9 +133,9 @@ public class tests {
 		@Test
 		public void testsolvep3p4p5p6p7() {
 			
-			Board boardinicial = new Board("A B CD ");
+			Board boardinicial = new Board("A CB");
 
-			Board boardobjetivo = new Board("AC B D");
+			Board boardobjetivo = new Board("AC B");
 	
 			Astar alg = new Astar();
 	
