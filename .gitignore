@@ -1,3 +1,6 @@
 Testing/bin/*
+Testing/bin
 *.class
 */*.class
+Testing/bin/tests.class
+*.class
