@@ -134,18 +134,18 @@ public class tests {
 		@Test
 		public void testsolvep3p4p5p6p7() {
 			
-			Board boardinicial = new Board("A CB");
+			Board boardinicial = new Board("A CB"); //Declara a Board Inicial 
 
-			Board boardobjetivo = new Board("AC B");
+			Board boardobjetivo = new Board("AC B"); //Declara a Board Final
 	
-			Astar alg = new Astar();
+			Astar alg = new Astar(); //Declara um objeto da Classe Astar a partir da qual se vai executar o algoritmo
 	
-			Iterator<Astar.State> resultado = alg.solve(boardinicial,boardobjetivo);
-			assertEquals(resultado.next().getBoard(),boardinicial);
-			assertEquals(resultado.next().getBoard(),new Board("A B C"));
-			Astar.State lastState = null;
-			assertEquals((lastState = resultado.next()).getBoard(),boardobjetivo);
-			assertTrue(2 == lastState.getG());
+			Iterator<Astar.State> resultado = alg.solve(boardinicial,boardobjetivo); //Executa o algoritmo para resolver o problema
+			assertEquals(resultado.next().getBoard(),boardinicial); //Verifica se o primeiro elemento da sequencia de saida esta correto
+			assertEquals(resultado.next().getBoard(),new Board("A B C")); //Verifica se o segundo elemento da sequencia de saida esta correto
+			Astar.State lastState = null; // Guarda o ultimo estado para se puder verificar tambem o custo final
+			assertEquals((lastState = resultado.next()).getBoard(),boardobjetivo); // Verifica se o ultimo elemento da sequencia de saida esta correto, i.e, e igual ao objetivo
+			assertTrue(2 == lastState.getG()); //Verifica se o custo total das operacoes e igual a 2.
 			//
 			//AB CD | A BCD | AC B D | A BC D | B ACD | 
 			//
