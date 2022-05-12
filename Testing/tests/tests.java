@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.Iterator;
@@ -16,13 +17,7 @@ public class tests {
 	@Rule     
 	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
-	@Test
-	public void testEqualsp3() {
-		//boards sao iguais
-        Board initial = new Board("AB C D");
-        Board l1 = new Board("AB D C");
-        assertEquals(initial,l1);//initial.equals(l1)
-    }
+	
 	
 	@Test
 	public void testEqualsp1() {
@@ -42,7 +37,15 @@ public class tests {
     }
 
 	@Test
-	public void testesucsnull() {
+	public void testEqualsp3() {
+		//boards sao iguais
+        Board initial = new Board("AB C D");
+        Board l1 = new Board("AB D C");
+        assertEquals(initial,l1);//initial.equals(l1)
+    }
+
+	@Test
+	public void testesucsp1() {
 		//Ilayout l, State n
 		//Ilayout -> passar uma board
 
@@ -62,7 +65,7 @@ public class tests {
 	}
 
 	@Test
-	public void testesucsnotnull() {
+	public void testesucsp2() {
 		//Ilayout l, State n
 		//Ilayout -> passar uma board
 
@@ -71,7 +74,7 @@ public class tests {
 		*/
 		//entra no if pq pai == null
 		Board board = new Board("A B");
-
+		
 		Astar.State pai = new Astar.State(board,null);
 		Astar alg = new Astar();
 
@@ -89,7 +92,7 @@ public class tests {
 	}
 	
 	@Test
-	public void testeboardsnaoiguais() {
+	public void testeboardp3p4() {
 		//entra no if pq !e.equals(n.father.layout)
 		//so dois elementos nao passa no teste
 		Board boardpai = new Board("A B C");
@@ -128,7 +131,7 @@ public class tests {
 		}
 
 		@Test
-		public void testsolvep3p4p5p6() {
+		public void testsolvep3p4p5p6p7() {
 			
 			Board boardinicial = new Board("A B CD ");
 
