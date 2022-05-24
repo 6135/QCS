@@ -66,7 +66,11 @@ class Astar {
 		List<State> sucs;
 		List<State> outsequence = new ArrayList<>();
 		boolean end = false;
+		int index = 0;
+		int indexFather = 0;
+		int indexSuccesors = 0;
 		while (!end) {
+			System.out.println("Main: " + index++);
 			try {
 				if (abertos.isEmpty())
 					throw new Exception();//terminar programa caso nao haja caminhos possiveis a fazer (board sem filhos)
@@ -86,6 +90,7 @@ class Astar {
 				outsequence.add(actual);
 				System.out.println("if (actual.layout.isGoal(goal))");
 				while (father != null) {
+					System.out.println("Father: " + indexFather++);
 					outsequence.add(0, father);
 					father = father.father;
 					System.out.println("while (father != null)");
@@ -96,6 +101,7 @@ class Astar {
 				fechados.add(actual);//meter esse no nos fechados
 				System.out.println("else");
 				for (State state: sucs) {
+					System.out.println("Succ: "+indexSuccesors++);
 					if (!fechados.contains(state)) {
 						System.out.println("if (!fechados.contains(state))");
 						abertos.add(state);//meter sucessores no abertos se nao estiverem nos fechados
