@@ -115,7 +115,7 @@ public class LoopStructureTesting {
         assertTrue("Solve should only return two layouts in the iterator", itrSize == 2);
     }
     @Test
-    public void solveTwiceSecondLoop(){
+    public void solveTwiceThirdLoop(){
         Astar dummyObj = new Astar();
         Board start = new Board("A B");
         Board goal = new Board("BA");
@@ -130,7 +130,7 @@ public class LoopStructureTesting {
     }
 
     @Test
-    public void solveTwiceThirdLoop(){
+    public void solveTwiceTwiceLoop(){
         Astar dummyObj = new Astar();
         Board start = new Board("A B C");
         Board goal = new Board("ABC");
