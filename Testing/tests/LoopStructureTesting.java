@@ -59,7 +59,7 @@ public class LoopStructureTesting {
 
     @Test
     public void successorsEnterLoopTypical(){
-        //If the board only has one child, it should only enter loop once
+        //If the board only has two children, it should only enter loop twice
         Board boardWithTypical = new Board("AB C DEF");
         /*
         AB C DEF
