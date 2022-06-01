@@ -130,7 +130,7 @@ public class LoopStructureTesting {
     }
 
     @Test
-    public void solveTwiceTwiceLoop(){
+    public void solveTwiceSecondLoop(){
         Astar dummyObj = new Astar();
         Board start = new Board("A B C");
         Board goal = new Board("ABC");
